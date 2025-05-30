@@ -8,29 +8,41 @@ This project provides core features of a customer relationship management system
 
 ## Key Features
 
-1. **Client & Project Management**
-   - Add, view, update, delete, and restore contacts.
-   - Soft-deletion (trash support) and permanent deletion.
-   - Organize clients by project or category.
+- **User Authentication**  
+  Register, login, logout, and Google OAuth integration.
 
-2. **Task Management**
-   - Create, track, and mark tasks as complete.
-   - View task details and deadlines.
-   - Restore or permanently delete tasks.
+- **Dashboard Overview**  
+  Centralized view of total contacts, tasks, documents, and recent activity.
 
-3. **Document Handling**
-   - Upload and manage documents.
-   - Support for viewing, deleting, and restoring files.
+- **Contact Management**  
+  Organize clients by project, view detailed info, and manage soft-delete/restore.
 
-4. **Multi-user Access & Role Management**
-   - Assign access and manage roles for collaborators.
-   - Delete and revoke access easily.
+- **Task Management**  
+  Create and track tasks with priorities, status updates, and related entities.
 
-5. **User Dashboard**
-   - Central dashboard to track activity, tasks, and updates.
+- **Document Storage**  
+  Upload and manage files linked to contacts or projects, with restore support.
 
-6. **Feedback Support**
-   - Built-in feedback submission feature for continuous improvement.
+- **Role-Based Access Control**  
+  Assign granular permissions (read/write/delete) to users across the app.
+
+- **Multi-User Account Switching**  
+  Switch between personal and shared accounts for collaborative workspaces.
+
+- **Activity Tracking**  
+  Automatic logging of recent actions for historical context.
+
+- **Theme Support**  
+  Light, dark, and system themes with persistent local storage.
+
+- **Trash System**  
+  Soft-delete logic for reversible deletion of tasks, contacts, and documents.
+
+- **Feedback Submission**  
+  Built-in form for sending issues, suggestions, or screenshots.
+
+- **Responsive UI**  
+  Designed for usability across desktop and mobile screens.
 
 ## Tech Stack
 
