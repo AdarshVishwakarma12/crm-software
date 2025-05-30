@@ -39,10 +39,7 @@ This project provides core features of a customer relationship management system
   Soft-delete logic for reversible deletion of tasks, contacts, and documents.
 
 - **Feedback Submission**  
-  Built-in form for sending issues, suggestions, or screenshots.
-
-- **Responsive UI**  
-  Designed for usability across desktop and mobile screens.
+  Built-in form for sending issues, or suggestions.
 
 ## Tech Stack
 
