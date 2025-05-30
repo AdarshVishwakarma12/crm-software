@@ -20,6 +20,7 @@ ALLOWED_HOSTS = [
     "CtrlCRM.pythonanywhere.com",
     "http://localhost:8000/",
     "localhost",
+    "*",
 ]
 
 
