@@ -52,6 +52,46 @@ This project provides core features of a customer relationship management system
 
 [Live Application](https://ctrlcrm.pythonanywhere.com)
 
+## Running Locally
+Follow these steps to run the project on your local machine:
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/AdarshVishwakarma12/crm-software.git
+   ```
+
+2. Navigate to the project directory:
+   ```bash
+   cd crm-software
+   ```
+
+3. Start the Docker service on your machine.
+
+4. Build and run the Docker containers:
+   ```bash
+   docker-compose up -d --build
+   ```
+
+5. Open your browser and navigate to:
+   ```
+   http://localhost:8000
+   ```
+
+6. Bingo! The application is now running locally.
+
+## Environment Variables
+
+The app uses environment variables for email configuration (send-feedback section).
+
+In `docker-compose.yml`, placeholder values are provided for development:
+
+```yaml
+EMAIL_HOST_USER=none@gmail.com
+EMAIL_HOST_PASSWORD=None
+```
+
+These are **not real credentials**. To use actual email features, replace them with valid SMTP credentials.
+
 ## Disclaimer
 
 > This project is actively being improved and is intended for educational or small-scale personal use. While fully functional, it may lack the scalability and advanced features found in commercial CRM systems.
