@@ -17,8 +17,6 @@ Dockerfile
 Dockerfile.archive
 docker-compose.yml
 
-*/temp*
-*/*/temp*
 docker
 .vagrant
 .data
