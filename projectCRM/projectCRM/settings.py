@@ -19,8 +19,10 @@ DEBUG = (os.environ.get("DEBUG_VALUE") == "True")
 ALLOWED_HOSTS = [
     "CtrlCRM.pythonanywhere.com",
     "http://localhost:8000/",
+    "http://127.0.0.1:8000/",
     "localhost",
-    "*",
+    "127.0.0.1",
+    "*"
 ]
 
 

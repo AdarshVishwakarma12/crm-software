@@ -1,0 +1,19 @@
+version: '3.8'
+
+services:
+
+    django:
+        container_name: django
+        build:
+            context: .
+        command: python manage.py runserver 0.0.0.0:8000
+        volumes:
+            - ./projectCRM:/CRM
+        ports:
+            - 8000:8000
+        environment:
+            - DEBUG_VALUE=True
+            - SECRET_KEY=956df69ad3ee8074f9474d3ccde2c1eb1d64b878088f6040129ef0e3d319b04c
+            - ALLOWED_HOST=localhost,127.0.0.1
+            - EMAIL_HOST_USER=none@gmail.com
+            - EMAIL_HOST_PASSWORD=None
