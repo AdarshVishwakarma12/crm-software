@@ -1,3 +1,4 @@
+[Version 1.0.0]
 - DONE Create Virtual Environment and Install Django Package
 
 - DONE Change Time Zone [IST]
