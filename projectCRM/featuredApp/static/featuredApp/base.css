@@ -149,6 +149,10 @@ body.theme-dark {
     --border-color: #333;*/
 }
 
+::selection {
+  background-color: #6bbf59;
+}
+
 html,
 body {
 

@@ -1,3 +1,72 @@
+.welcome-box {
+    background: var(--featuredApp-dashboard-welcome-box);
+    padding: 2.5rem;
+    border-radius: 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    animation: slideFadeIn 1s ease-out;
+}
+
+.welcome-box h2 {
+    font-size: 2.8rem;
+    font-weight: 800;
+    color: #0d6efd;
+    margin-bottom: 1rem;
+}
+
+.welcome-box p {
+    font-size: 1.25rem;
+    color: var(--featuredApp-dashboard-welcome-box-p-color);
+    font-style: italic;
+    font-weight: 600;
+}
+
+@keyframes slideFadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.no-animation {
+    animation: none !important;
+}
+
+.division-line-h2 {
+    margin: 20px 0; 
+    border-color: var(--featuredApp-dashboard-division-line-h2);
+}
+
+/* Card View */
+.dashboard-card-view {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+/* Search Bar */
+.dashboard-search-bar {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.dashboard-ul-list-item {
+    background-color: var(--featuredApp-dashboard-ul-list-item-background-color);
+    color: var(--featuredApp-dashboard-ul-list-item-color);
+
+    border-color: var(--featuredApp-dashboard-ul-list-item-border-color);
+}
+
+.dashboard-ul-list-item a:hover {
+    color: var(--featuredApp-dashboard-ul-list-item-a-hover);
+}
+
+
 button.switch-link {
     background: none;
     border: none;

@@ -1,39 +1,40 @@
 [Version: 1.1.0-enterprise]
-- Company Specific
-    - Dashboard
-        - Change total Clients to no. of list
-        - Task List
-            - Visible to Owner and Assignee
-        - Recent Activities
-            - Owner / Current 
+- DONE Setup New Branch
 
-    - Contacts
-        - Change 'Contacts' to 'Leads' (in frontend)
-        - Add filter ['by list'; 'by date created'; 'other']
-        - Add Custom fields shown on the page
-        - Add JS for smooth 'list search' and 'contact search'
+- Dashboard
+    - DONE Change total Clients to no. of list
+    - Task List
+        - Visible to Owner and Assignee
+    - Recent Activities
+        - Owner / Current
 
-    - Tasks
-        - Task Creation Form
-            - Add field 'List'
-            - Filter Contact by List
-                - Can't be choose until List is selected
-                - Show Contacts based on current List
-                - Contact Can be Empty
-        - Add 'In Progress' Button for 'New' tasks
+- Contacts
+    - ONGOING Change 'Contacts' to 'Leads' (in frontend)
+    - ONGOING Add Dropdown for Search Bar
+    - ONGOING Add filter ['by list'; 'by date created'; 'other']
+    - Add Custom fields shown on the page
+    - Add JS for smooth 'list search' and 'contact search'
 
-    - Roles
-        - Add roles [Manager; Senior Executive; Executive;]
-            - Default Settings
-    
-    - Change Google Login to Auth
+- Tasks
+    - Task Creation Form
+        - Add field 'List'
+        - Filter Contact by List
+            - Can't be choose until List is selected
+            - Show Contacts based on current List
+            - Contact Can be Empty
+    - Add 'In Progress' Button for 'New' tasks
 
-- Others
-    - Secure
-    - Update Bootstrap
-    - Add 'Two Factor Authentication'
-    - Testing FrontEnd
-    - Django Internal Testing
+- Roles
+    - Add roles [Manager; Senior Executive; Executive;]
+        - Default Settings
+
+- Change Google Login to Auth
+
+- Secure
+- Update Bootstrap
+- Add 'Two Factor Authentication'
+- Testing FrontEnd
+- Django Internal Testing
 
 <!--
 - Git Command For this specific version

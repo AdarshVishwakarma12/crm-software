@@ -160,7 +160,8 @@ def dashboard_view(request, *args, **kwargs):
     ).exclude(status="Completed").order_by('due_date')[:5]
 
     if get_active_business_user_with_permission(request, 'can_read_contact', show_err='Contact Read')[1]:
-        total_client = len(Client.objects.filter(companyAssignee = active_business_user))
+        # total_client = len(Client.objects.filter(companyAssignee = active_business_user))
+        total_client = len(Project.objects.filter(user = active_business_user)) - 1
         if query:
             find_client_by_query = Client.objects.filter(name__icontains=query, companyAssignee = active_business_user)
             search_result += list(find_client_by_query)
@@ -274,8 +275,12 @@ def contact_view(request, *args, **kwargs):
                     projectValidForm = formA.save(commit = False)
                     projectValidForm.user = active_business_user
                     projectValidForm.save() # Save the form
-                    messages.success(request, f"New List Created Successfully!")
-                    ActivityLog.objects.create(user=logged_in_user, action=f"Created New List")
+
+                    print(formA)
+                    projectNameTmp = formA.cleaned_data['name']
+
+                    messages.success(request, f"Company: '{projectNameTmp}' created!")
+                    ActivityLog.objects.create(user=logged_in_user, action=f"Added Company: {projectNameTmp}")
                 else:
                     messages.error(request, "Project Name should be unique!")
             return redirect('appContacts')

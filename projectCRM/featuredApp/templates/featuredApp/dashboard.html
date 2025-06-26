@@ -12,59 +12,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'featuredApp/dashboard.css' %}">
 
     <style type="text/css">
-        .welcome-box {
-            background: var(--featuredApp-dashboard-welcome-box);
-            padding: 2.5rem;
-            border-radius: 20px;
-            text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            animation: slideFadeIn 1s ease-out;
-        }
-
-        .welcome-box h2 {
-            font-size: 2.8rem;
-            font-weight: 800;
-            color: #0d6efd;
-            margin-bottom: 1rem;
-        }
-
-        .welcome-box p {
-            font-size: 1.25rem;
-            color: var(--featuredApp-dashboard-welcome-box-p-color);
-            font-style: italic;
-            font-weight: 600;
-        }
-
-        @keyframes slideFadeIn {
-            0% {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-            100% {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .no-animation {
-            animation: none !important;
-        }
-
-        .division-line-h2 {
-            margin: 20px 0; 
-            border-color: var(--featuredApp-dashboard-division-line-h2);
-        }
-
-        .dashboard-ul-list-item {
-            background-color: var(--featuredApp-dashboard-ul-list-item-background-color);
-            color: var(--featuredApp-dashboard-ul-list-item-color);
-
-            border-color: var(--featuredApp-dashboard-ul-list-item-border-color);
-        }
-
-        .dashboard-ul-list-item a:hover {
-            color: var(--featuredApp-dashboard-ul-list-item-a-hover);
-        }
+        
     </style>
 
 {% endblock addCSSlink %}
@@ -94,25 +42,37 @@
 
     </div>
 
-    <div class="row text-white">
+    <div class="list-group text-white">
+
+
         <!-- Client Section  -->
-        <div class="col-md-3 mb-3">
-            <div class="card bg-primary p-3">
-                <h5>Total Clients</h5>
-                <p>{{ total_clients }}</p>
+        <div class="w-100 mb-3">
+            <div class="dashboard-card-view card bg-primary p-3">
+                <div>
+                    <h5>Total Companies Connected</h5>
+                    <p>{{ total_clients }}</p>
+                </div>
+                <div>
+                    <a class="btn btn-dark" href="{% url 'appContacts' %}">+ Add Client</a>
+                </div>
             </div>
         </div>
 
         <!-- PENDING: Tasks Section  -->
-        <div class="col-md-3 mb-3">
-            <div class="card bg-warning p-3">
-                <h5>Pending Tasks</h5>
-                <p>{{ pending_tasks }}</p>
+        <div class="w-100 mb-3">
+            <div class="dashboard-card-view card bg-warning p-3">
+                <div>
+                    <h5>Pending Tasks</h5>
+                    <p>{{ pending_tasks }}</p>
+                </div>
+                <div>
+                    <a class="btn btn-dark" href="{% url 'appTasks' %}">+ Add Task</a>
+                </div>
             </div>
         </div>
 
         <!-- COMPLETED: Task Section -->
-        <div class="col-md-3 mb-3">
+        <div class="w-100 mb-3">
             <div class="card bg-success p-3">
                 <h5>Completed Tasks</h5>
                 <p>{{ completed_tasks }}</p>
@@ -120,20 +80,22 @@
         </div>
 
         <!-- Document Section -->
-        <div class="col-md-3 mb-3">
-            <div class="card bg-info p-3">
-                <h5>Documents Uploaded</h5>
-                <p>{{ total_documents }}</p>
+        <div class="w-100 mb-3">
+            <div class="dashboard-card-view card bg-info p-3">
+                <div>
+                    <h5>Documents Uploaded</h5>
+                    <p>{{ total_documents }}</p>
+                </div>
+                <div>
+                    <a class="btn btn-dark" href="{% url 'appDocuments' %}">+ Upload Document</a>
+                </div>
             </div>
         </div>
     </div>
 
-    <div class="d-flex justify-content-between my-4">
-        <a class="btn btn-outline-success" href="{% url 'appContacts' %}">+ Add Client</a>
-        <a class="btn btn-outline-primary" href="{% url 'appTasks' %}">+ Add Task</a>
-        <a class="btn btn-outline-secondary" href="{% url 'appDocuments' %}">+ Upload Document</a>
+    <div class="d-flex w-50 ml-auto my-4 justify-content-end">
 
-        <form class="d-flex" method="get" action="#">
+        <form class="d-flex w-100" method="get" action="#">
             <input class="form-control me-2" name="q" type="search" placeholder="Search clients/tasks...">
             <button class="btn btn-dark" type="submit">Search</button>
         </form>
@@ -173,7 +135,11 @@
         {% endif %}
 
     {% elif query %}
-        <p class="text-muted dashboard-ul-list-item">No results found for "{{ query }}".</p>
+        <ul class="list-group mb-4">
+            <li class="list-group-item dashboard-ul-list-item">
+                <div class="text-muted">No results found for "{{ query }}".</div>
+            </li>
+        </ul>
     {% endif %}
 
     <h4>Upcoming Tasks</h4>
