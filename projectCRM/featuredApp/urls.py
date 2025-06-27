@@ -14,7 +14,6 @@ urlpatterns = [
     # Dashboard considered as the home
     path('dashboard/', views.dashboard_view, name='appDashboard'),
 
-
     # ---- ==== Related to Clients && Project(List) ==== ----
     # List View Clients
     path('contacts/', views.contact_view, name='appContacts'),
@@ -32,6 +31,8 @@ urlpatterns = [
     path('list/<int:id>/permanentDelete/', views.project_permanent_delete_view, name='appProjectPermanentDelete'),
     # Restoring Deleted Project
     path('list/<int:id>/restore/', views.project_restore_view, name='appProjectRestore'),
+    # SearchBox
+    path('contacts/search-autocomplete/', views.contact_search_autocomplete_view, name='searchAutocomplete'),
 
     # ---- ==== Related to Tasks ==== ----
     # Task - Calendar; Notification; and more!

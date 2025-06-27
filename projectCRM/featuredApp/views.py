@@ -305,10 +305,12 @@ def contact_view(request, *args, **kwargs):
         formB = ClientCreationForm(user = user)
     # Retrieving Values from DATABASE [current user]
     if(active_business_user == logged_in_user):
+
+        # Extracting valid projects and valid contacts
         projects = Project.objects.filter(user = logged_in_user)
         contacts = Client.objects.filter(companyAssignee = logged_in_user)
+
     else:
-        print("I am here!!")
         # projects = Project.objects.filter(
         #     shared_project_permissions__shared_with = logged_in_user,
         #     shared_project_permissions__can_read_project = True,
@@ -339,13 +341,17 @@ def contact_view(request, *args, **kwargs):
     context = {
         'formA': formA,
         'formB': formB,
+
         'contacts': contacts,
         'projects': projects,
+
         'total_contacts': contacts.count(),
         'selected_project_name': project_name,
         'set_to_all': True if project_name is None else False,
+
         'businessuser': user,
     }
+
     return render (
         request, 
         'featuredApp/contacts.html', 
@@ -521,6 +527,24 @@ def project_permanent_delete_view(request, id, *args, **kwargs):
     messages.warning(request, f"Project {project_name} is deleted.")
 
     return redirect('appTrash')
+
+# ---- ==== Featured Related to SearchAutoComplete ==== ----
+from django.http import JsonResponse
+def contact_search_autocomplete_view(request):
+    print("I am currently finding the results!")
+
+    q = request.GET.get('q', '')
+
+    print("query: ", q)
+    projectMatches = list(Project.objects.filter(name__icontains=q).values_list('name', flat=True)[:5])
+    contactMatches = list(Client.objects.filter(name__icontains=q).values_list('name', flat=True)[:5])
+
+    print(projectMatches)
+
+    return JsonResponse({
+        'projectsSearchList': projectMatches,
+        'contactsSearchList': contactMatches,
+    })
 
 # ---- ==== Featured Related to Tasks View ==== ----
 # Include: [tasks_view; ]\

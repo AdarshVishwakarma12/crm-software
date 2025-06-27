@@ -109,7 +109,7 @@
 
 <!-- Main CONTENT GOES HERE -->
 {% block contentBody1 %}
-	<h2 style="font-weight: bolder;"> Contacts </h2>
+	<h2 style="font-weight: bolder;"> Leads </h2>
 
 	<hr class="division-line-h2" style="">
 
@@ -129,7 +129,7 @@
 			</li>
 		{% endfor %}
 
-		<!-- If the totalProjects exceept length of 5, move it to more field -->
+		<!-- If the totalProjects except length of 5, move it to more field -->
 		{% with projects|length as total_projects %}
 		    {% if total_projects > 5 %}
 		        <li class="nav-item" style="padding-left: 4px;">
@@ -197,7 +197,11 @@
 	  	</div>
 	</div>
 
-	<input type="text" class="form-control my-2" placeholder="Search contacts...">
+	<div style="position: relative; display: inline-block; width: 100%;">
+		<input type="text" id="search-input" class="form-control my-2" placeholder="Search leads / company...">
+		<div id="suggestions" class="dropdown-menu show" style="display: none; position: absolute; z-index: 900; width: 100%; outline: none;">
+		</div>
+	</div>
 
 	<table class="table">
 		<thead>
@@ -221,6 +225,13 @@
 			{% endfor %}
 		</tbody>
 	</table>
+
+	<!-- dumps the Python list as JSON into a hidden <script> tag with an ID -->
+	{% comment %}
+	{{ projectsList|json_script:"project-names-data" }}
+	{{ contactsList|json_script:"contact-names-data" }}
+	{% endcomment %}
+
 
 {% endblock contentBody1 %}
 
@@ -387,9 +398,41 @@
 			}
 		});
 
-		console.log("hello there");
-		// Script Specific for Dropdown Menu
-		let listList = "{{ projects }}";
-		console.log(listList);
+		// Script Specific for Search Box
+		const inputSearchBox = document.getElementById('search-input');
+		const suggestionBox = document.getElementById('suggestions');
+
+		inputSearchBox.addEventListener('keydown', async() => {
+			const query = inputSearchBox.value.trim();
+			if(!query) {
+				suggestionBox.style.display = 'none';
+				return;
+			}
+
+			console.log('typed: ')
+			console.log(query);
+
+			const response = await fetch(`search-autocomplete/?q=${query}`);
+			const data = await response.json();
+
+			const combinedData = [...data.projectsSearchList, ...data.contactsSearchList];
+
+			if(combinedData.length) {
+				suggestionBox.innerHTML = combinedData.map(item => `
+					<button type='button' class='dropdown-item'>${item}</button>
+				`).join('');
+				suggestionBox.style.display = 'block';
+			} else {
+				suggestionBox.style.display = 'none';
+			}
+		});
+
+		suggestionBox.addEventListener('click', (e) => {
+			if(e.target.tagName == 'BUTTON') {
+				input.value = e.target.textContent;
+				suggestionBox.style.display = 'none';
+			}
+		});
+
 	</script>
 {% endblock extraJS %}
