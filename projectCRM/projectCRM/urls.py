@@ -8,6 +8,7 @@ from django.conf.urls.static import static
 from accounts.views import indexView
 from accounts.views import aboutView
 from accounts.views import registrationView
+from accounts import views as accountViews
 
 # Views from featuredApp
 from featuredApp.views import profile_view
@@ -23,8 +24,13 @@ urlpatterns = [
     path('home/', indexView, name='home'),
     path('about/', aboutView, name='about'),
 
-    # Google Sign-up / Login
+    # Google Sign-up / Log-in
     path("accounts/", include("allauth.urls")),
+
+    # Microsoft Sign-up / Log-in
+    path('signin', accountViews.sign_in, name='signin'),
+    path('get_token', accountViews.get_token, name='get_token'),
+    path('signout', accountViews.sign_out, name='signout'),
 
     # Creating New User [Registration Page]
     path('register/', registrationView, name='register'),

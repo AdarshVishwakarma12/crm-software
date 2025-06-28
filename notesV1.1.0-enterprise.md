@@ -28,7 +28,7 @@
     - Add roles [Manager; Senior Executive; Executive;]
         - Default Settings
 
-- Change Google Login to Auth
+- Add Outlook Authentication
 
 - Secure
 - Update Bootstrap

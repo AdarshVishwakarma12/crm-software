@@ -3,6 +3,10 @@ __pycache__
 frontEndDesign
 env
 
+# Critical
+oauth_setttings.yml
+.env
+
 # For Mac
 .DS_Store
 

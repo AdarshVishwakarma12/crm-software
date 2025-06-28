@@ -124,17 +124,6 @@
     opacity: 0.95;
   }
 
-  .feature-btn:hover {
-    background: linear-gradient(90deg, #3291ff, #0070f3);
-    box-shadow: 0 12px 30px rgb(50 145 255 / 0.6);
-    transform: scale(1.05);
-    color: white;
-  }
-
-  .feature-btn:hover h5,
-  .feature-btn:hover p {
-    color: white;
-  }
   .register-btn {
     background: #ffffff;
     color: #000000;
@@ -174,9 +163,12 @@
 {% block contentBody1 %}
 <div class="container py-5 text-center welcome-bg shadow-sm">
     <h1 class="display-4 fw-bold mb-3 modern-heading">Welcome to &lt;Ctrl&gt;CRM</h1>
+
     <p class="lead modern-subtitle">Track leads, manage customers, and grow your business — all in one place.</p>
 
     {% if not user.is_authenticated %}
+        <a href="{% url 'signin' %}" class="btn btn-lg rounded-pill px-5 shadow-sm modern-btn">Login with Outlook</a>
+
         <a href="{% provider_login_url 'google' %}?next=/" class="btn btn-lg rounded-pill px-5 shadow-sm modern-btn">
             Login with Google
         </a>
@@ -196,19 +188,19 @@
 
 <div class="container py-4">
     <div class="row g-4">
-        <div class="col-md-4">
+        <div class="w-100 mb-3">
             <button class="feature-btn">
                 <h5>Lead Management</h5>
                 <p>Organize and track potential clients easily with intuitive tools.</p>
             </button>
         </div>
-        <div class="col-md-4">
+        <div class="w-100 mb-3">
             <button class="feature-btn">
                 <h5>Customer Profiles</h5>
                 <p>Keep detailed records of customer interactions and histories.</p>
             </button>
         </div>
-        <div class="col-md-4">
+        <div class="w-100 mb-3">
             <button class="feature-btn">
                 <h5>Task Scheduling</h5>
                 <p>Easily assign tasks, track progress, and stay in sync with your team.</p>

@@ -163,8 +163,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default Django backend
-    'allauth.account.auth_backends.AuthenticationBackend', # Cutom [GOOGLE LOGIN]
+    # 'allauth.account.auth_backends.AuthenticationBackend', # Cutom [GOOGLE LOGIN]
 ]
+
+# ---- ==== Microsoft Login ==== ----
+MSAL_CLIENT_ID = os.environ.get('MICROSOFT_CLIENT_ID')
+MSAL_CLIENT_SECRET = os.environ.get('MICROSOFT_CLIENT_SECRET')
+MSAL_AUTHORITY = "https://login.microsoftonline.com/common"  # or your tenant
+MSAL_REDIRECT = "http://localhost:8000/get_token"
+MSAL_SCOPES = ["User.Read"]
 
 # ---- ==== Specific to CRM Software ==== ----
 
