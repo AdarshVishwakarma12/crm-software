@@ -9,9 +9,17 @@
         - Owner / Current
 
 - Contacts
-    - ONGOING Change 'Contacts' to 'Leads' (in frontend)
+    - DONE Change 'Contacts' to 'Leads' (in frontend)
     - ONGOING Add Dropdown for Search Bar
+        - DONE Implement AJAX
+        - Adapt with Theme
     - ONGOING Add filter ['by list'; 'by date created'; 'other']
+    - ONGOING Custom Column
+        - Add Pop Up Window
+        - Implement Dragger
+        - Working Save Button
+        - Create Model to save changes
+        - Add Reset Button
     - Add Custom fields shown on the page
     - Add JS for smooth 'list search' and 'contact search'
 

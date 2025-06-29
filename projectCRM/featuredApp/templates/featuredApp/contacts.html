@@ -22,87 +22,8 @@
 	<!-- Specific for Project pop-up  -->
 	<link rel="stylesheet" type="text/css" href="{% static 'featuredApp/pop_up.css' %}">
 
-	<style>
-		.icon-button:focus,
-		.icon-button:hover,
-		.icon-button:active {
-			outline: none;
-		}
-
-		.more-btn,
-		.icon-button {
-			background-color: var(--featuredApp-contacts-icon-button-background-color);
-			color: var(--featuredApp-contacts-icon-button-color);
-		}
-
-		.more-btn:hover {
-			color: green;
-		}
-
-	    .icon-button.edit:hover {
-	        color: green;
-	    }
-
-	    .icon-button.delete:hover {
-	        color: red;
-	    }
-
-	    .active-more {
-	    	color: red;
-	    }
-
-	    .division-line-h2 {
-            margin: 20px 0; 
-            border-color: var(--featuredApp-dashboard-division-line-h2);
-        }
-
-	    table tr, table td {
-			border-bottom: 1px solid var(--featuredApp-contacts-table-border-color);
-		}
-
-		a:hover {
-			color: var(--featuredApp-contacts-a-hover);
-		}
-
-		input[type="checkbox"] {
-			accent-color: var(--featuredApp-contacts-checkbox-accent-color);
-		}
-
-		.form-control {
-			background-color: var(--featuredApp-contacts-form-control-input-bg);
-			color: var(--featuredApp-contacts-form-control-input-color);
-			border: 1px solid var(--featuredApp-contacts-form-control-input-border);
-			caret-color: var(--featuredApp-contacts-form-control-input-caret-color);
-		}
-
-		.form-control::placeholder {
-			color: var(--featuredApp-contacts-form-control-input-placeholder);
-		}
-
-		.form-control:focus {
-			background-color: var(--featuredApp-contacts-form-control-input-bg);
-			color: var(--featuredApp-contacts-form-control-input-color);
-			/*border-color: var(--featuredApp-contacts-form-control-input-focus-border);*/
-		}
-
-		.close-popup-btn,
-		.content-section,
-		.add-pop-up-window {
-			background-color: var(--featuredApp-contacts-form-add-pop-up-window-background-color);
-			color: var(--featuredApp-contacts-form-add-pop-up-window-color);
-		}
-
-		.close-popup-btn:hover {
-			color: var(--featuredApp-contacts-form-add-pop-up-window-color);
-		}
-
-		.content-section {
-			outline: none;
-			border: none;
-		}
-	</style>
-
-
+	<!-- Specific for contacts -->
+	<link rel="stylesheet" type="text/css" href="{% static 'featuredApp/contacts.css' %}">
 {% endblock addCSSlink %}
 
 
@@ -177,6 +98,10 @@
 
 		<div>
 
+
+			<button class="add-btn btn btn-sm icon-button column" type="button" onclick="openCustomColumnsPopUp()">
+				<img src="{% static 'featuredApp/icons/filter-svgrepo-com.svg' %}" alt="" height="25" style="filter: invert(1);">
+			</button>
 			<button class="btn btn-dark" type="button" onclick="openDocumentFormPopUp()">Add Contact</button>
 
 			<!-- This feature is for future development -->
@@ -203,7 +128,7 @@
 		</div>
 	</div>
 
-	<table class="table">
+	<table class="table" id="dataTable">
 		<thead>
 			<tr>
 				<th><input type="checkbox" /></th>
@@ -337,6 +262,54 @@
 	<div class="popup-overlay" id="popupOverlay2" onclick="closeDocumentFormPopUp()"></div>
 {% endblock addPopUp2 %}
 
+{% block addPopUp3 %}
+	<!-- The Following defined the POP-UP WINDOW for Customizing the Columns -->
+	<div class="add-pop-up-window" id="custom-column-pop-up-window-element" style="max-width: 600px;">
+
+		<span class="close-popup-btn" onclick="closeCustomColumnsPopUp()">&times;</span>
+
+		<!-- There GOES the Custom Column Content -->
+		<!-- Referenced From accounts/register.html -->
+		<div class="content-section">
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4" style="font-weight: 800"> 
+					Cutomize Columns
+					<br>
+					<div style="font-size: 12px; line-height: 1.1; font-weight: 300; margin-bottom: 8px">
+						Customize Your Columns
+					</div>
+				</legend>
+
+				<div id="manageColumns">
+					<ul id="columnsList">
+						<li draggable="true">
+							<label><input type="checkbox" checked> Checkbox </label>
+						</li>
+						<li draggable="true">
+							<label><input type="checkbox" checked> Full Name </label>
+						</li>
+						<li draggable="true">
+							<label><input type="checkbox" checked> Email </label>
+						</li>
+						<li draggable="true">
+							<label><input type="checkbox" checked> Phone </label>
+						</li>
+						<li draggable="true">
+							<label><input type="checkbox" checked> Address </label>
+						</li>
+					</ul>
+				</div>
+
+				<div class="form-group">
+					<button class="w-100 btn btn-dark" type="submit" name="form_type" value="client_form">Save</button>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+
+	<!-- This div allow us to close the pop-up if we click outside.. -->
+	<div class="popup-overlay" id="popupOverlay3" onclick="closeCustomColumnsPopUp()"></div>
+{% endblock addPopUp3 %}
 
 <!-- There GOES the extra script that handles the pop-up window [ show / hide ] -->
 {% block extraJS %}
@@ -398,6 +371,27 @@
 			}
 		});
 
+		// Script Specific for Custom Columns Pop-Up Window
+		let customColumnPopUp = document.getElementById('custom-column-pop-up-window-element');
+		let tmp3 = document.getElementById('popupOverlay3');
+		
+		function openCustomColumnsPopUp() {
+			customColumnPopUp.classList.add('open-popup');
+			tmp3.classList.add('active');
+		}
+
+		function closeCustomColumnsPopUp() {
+			customColumnPopUp.classList.remove('open-popup');
+			tmp3.classList.remove('active');
+		}
+
+		// Close popup on ESC key
+		document.addEventListener('keydown', function(event) {
+			if (event.key === 'Escape') {
+				closeCustomColumnsPopUp();
+			}
+		});
+
 		// Script Specific for Search Box
 		const inputSearchBox = document.getElementById('search-input');
 		const suggestionBox = document.getElementById('suggestions');
@@ -433,6 +427,77 @@
 				suggestionBox.style.display = 'none';
 			}
 		});
+
+		// Specific for Column Arrangement
+		const checkboxes = document.querySelectorAll('#columnsList input[type=checkbox]');
+		const table = document.getElementById('dataTable');
+		const columnsList = document.getElementById('columnsList');
+
+		checkboxes.forEach((checkbox, index) => {
+			checkbox.addEventListener('change', () => {
+				const colIndex = index;
+				for (let row of table.rows) {
+					if (row.cells[colIndex]) {
+						row.cells[colIndex].style.display = checkbox.checked ? '' : 'none';
+					}
+				}
+			});
+		});
+
+		// Drag and drop to rearrange columns
+		let draggedItem = null;
+
+		columnsList.addEventListener('dragstart', (e) => {
+			draggedItem = e.target;
+		});
+
+		columnsList.addEventListener('dragover', (e) => {
+			e.preventDefault();
+			const target = e.target.closest('li');
+			if (target && target !== draggedItem) {
+				const bounding = target.getBoundingClientRect();
+				const offset = bounding.y + bounding.height / 2;
+				if (e.clientY - offset > 0) {
+					target.after(draggedItem);
+				} else {
+					target.before(draggedItem);
+				}
+			}
+		});
+
+		columnsList.addEventListener('drop', () => {
+			updateTableColumns();
+		});
+
+		// Update table columns order based on list order
+		function updateTableColumns() {
+			const newOrder = Array.from(columnsList.children).map(li => li.innerText.trim());
+			const rows = Array.from(table.rows);
+			rows.forEach(row => {
+				const newCells = [];
+				newOrder.forEach(text => {
+					for (let cell of row.cells) {
+						if (cell.innerText.trim() === text || cell.textContent.trim() === text) {
+							newCells.push(cell);
+							break;
+						}
+					}
+				});
+				newCells.forEach(cell => row.appendChild(cell));
+			});
+		}
+
+		// Reset button to show all columns and original order
+		function resetColumns() {
+			checkboxes.forEach(cb => cb.checked = true);
+			for (let row of table.rows) {
+				for (let cell of row.cells) {
+					cell.style.display = '';
+				}
+			}
+			// Optionally reset column order by reloading page
+			location.reload();
+		}
 
 	</script>
 {% endblock extraJS %}

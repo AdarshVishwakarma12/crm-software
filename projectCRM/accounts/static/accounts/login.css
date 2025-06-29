@@ -1,0 +1,7 @@
+.container.login-window > * {
+    margin-bottom: 20px;
+}
+
+fieldset.form-group legend {
+    margin-bottom: 20px;
+}

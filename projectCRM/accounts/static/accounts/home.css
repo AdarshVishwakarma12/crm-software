@@ -1,14 +1,21 @@
-.top-level {
-	display: flex;
-	flex: 1;
-	flex-direction: row;
-	border: solid;
-	border-radius: 2px;
+a {
+	text-decoration: none;
 }
 
-.side-bar {
-	
-	top: 0;
-	border: solid;
-	border-color: red;
+a:hover, a:active {
+	text-decoration: none;
+}
+
+.go-apps-btn {
+	padding: 4px 9px;
+	background-color: transparent; 
+	color: white; border: 1px solid; 
+	border-radius: 8px;
+}
+
+.container.content-window {
+	margin-top: 150px;
+
+	position: relative;
+	z-index: 50;
 }

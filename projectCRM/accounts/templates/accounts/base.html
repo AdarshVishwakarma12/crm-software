@@ -5,189 +5,56 @@
 <head>
     <meta charset="UTF-8">
 
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
     <link rel="stylesheet" type="text/css" href="{% static 'accounts/base.css' %}">
-
-    <link rel="stylesheet" type="text/css" href="{% static 'featuredApp/base.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/home.css' %}">
     {% block addCSSlink %}{% endblock addCSSlink %}
 
     {% block contentTitle %} {% endblock contentTitle %}
-
-    <!-- Loading ICONS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" integrity="sha512-..." crossorigin="anonymous" />
 </head>
 <body>
-    <div class="site-header layout">
 
-        <header class="top-header">
-
-            <div class="left-nav">
-
-                <div class="menu-toggle" onclick="toggleSidebar()"> ☰ </div>
-
-                <a href="{% url 'index' %}"> 
-                    <div class="logo"> CRM </div> 
-                </a>
-
-            </div>
-
-            <div class="right-nav">
-
-                <!-- LogIn -->
-                <!-- SignUp -->
-                <!-- Navbar Right Side -->
-                    {% if user.is_authenticated %}
-                        <div class="navbar-nav" style="display: flex; flex-direction: row; justify-content: space-between; column-gap: 18px;">
-                            
-                            <div>
-                                <a class="nav-item nav-link" href="{% url 'appDashboard' %}">Go To Apps</a>
-                            </div>
-
-                            <div style="align-content: center;">
-                                <form action="{% url 'logout' %}" method="post" style="display: inline;">
-                                    {% csrf_token %}
-                                    <button type="submit" class="nav-item nav-link l-own">Logout
-                                    </button>
-                                </form>
-                            </div>
-                            
-                            <!-- <a class="nav-item nav-link" href="{% url 'logout' %}">Logout</a> -->
-                        </div>
-                    {% else %}
-                        <div class="navbar-nav" style="display: flex; flex-direction: row; justify-content: space-between; column-gap: 18px;">
-                            <div><a class="nav-item nav-link" href="{% url 'login' %}">Login</a></div>
-                            <div><a class="nav-item nav-link" href="{% url 'register' %}">Register</a></div>
-                        </div>
-                    {% endif %}
-
-            </div>
-        </header>
-
-        <aside class="sidebar" id="sidebar">
-
-            <!-- <div class="menu-logo"><i class="fas fa-bars"></i></div> -->
-
-            <nav class="menu-items">
-
-                <!-- ITEM ONE -->
-                <a 
-                    href="{% url 'index' %}" 
-                    class=
-                    "
-                        {% if request.path == '/' %}
-                        active
-                        {% endif %}
-                    "
-                >
-                    <!-- ICON -->
-                    <i class="fas fa-home"></i>
-                    <!-- Name -->
-                    <span class="menu-label">Home</span>
-
-                </a>
-
-                <!-- ITEM TWO -->
-                <a 
-                    href="{% url 'about' %}" 
-                    class=
-                    "
-                        {% if request.path == '/about' %}
-                            active
-                        {% endif %}
-                    "
-                >
-
-                    <!-- ICON -->
-                    <i class="fas fa-info-circle"></i>
-                    <!-- Name -->
-                    <span class="menu-label">About</span>
-                </a>
-
-            </nav>
-        </aside>
-
-        <!-- <main class="content">
-            <h2>Contacts</h2>
-            {% block content %}
-            {% endblock %}
-        </main> -->
+    
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+        <div class="blob blob-4"></div>
     </div>
 
-    <div class="container-defined" id="contentBody1">
+      <header>
 
-        {% if messages %}
+        <a href="{% url 'index' %}"> 
+            <div class="left_nav">
+                <img src="{% static 'accounts/icons/icon.svg' %}" alt="My Logo" height="50">
+                <div class="img"> CRM </div>
+            </div>
+        </a>
 
-            {% for message in messages %}
-                <div class="alert alert-{% if message.tags == 'error' %}danger{% else %}{{ message.tags }}{% endif %}"> {{ message }} </div>
-            {% endfor %}
-
-        {% endif %}
-
-        <div class="container">
-            {% block contentBody1 %} {% endblock contentBody1 %}
-        </div>
         
 
-    </div>
+        <div class="account-btn">
+            {% if user.is_authenticated %}
+                <a href="{% url 'appDashboard' %}">
+                    <button class="go-apps-btn">
+                        Go to Apps
+                    </button>
+                </a>
+            {% endif %}
+            <a href="#">
+                <img  src="{% static 'accounts/icons/helpBtn.svg' %}">
+            </a>
+        </div>
+    </header>
 
-    <div style="margin-top: 100px;"></div>
-
+    {% block contentBody1 %}{% endblock contentBody1 %}
 
     <!-- JS files attached below -->
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
     <!-- JS files ended -->
 
-    <!-- Extra JS Features -->
-    <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            const sidebar = document.getElementById("sidebar");
-            const contentBody = document.getElementById("contentBody1");
-
-            const isCollapsed = localStorage.getItem("sidebar-collapsed") === "true";
-
-            if (isCollapsed) {
-                sidebar.classList.add("collapsed");
-                contentBody.classList.add("collapsed")
-            } else {
-                sidebar.classList.add("expanded");
-                contentBody.classList.add("expanded")
-            }
-
-            // Finally, make it visible
-            sidebar.classList.add("ready");
-
-            // Toggle function
-            window.toggleSidebar = function () {
-                sidebar.classList.toggle("collapsed");
-                sidebar.classList.toggle("expanded");
-
-                contentBody.classList.toggle("collapsed")
-                contentBody.classList.toggle("expanded")
-
-                const nowCollapsed = sidebar.classList.contains("collapsed");
-                localStorage.setItem("sidebar-collapsed", nowCollapsed);
-            };
-        });
-
-
-        function toggleAccountPanel() {
-            const panel = document.getElementById("accountPanel");
-            panel.classList.toggle("open");
-        }
-
-        // Close Account when clicking outside
-        document.addEventListener("click", function (event) {
-            const panel = document.getElementById("accountPanel");
-            const trigger = document.querySelector(".account-trigger");
-
-            if (!panel.contains(event.target) && !trigger.contains(event.target)) {
-                panel.classList.remove("open");
-            }
-        });
-    </script>
+    
     <!-- Extra JS Features ENDED -->
 
 </body>

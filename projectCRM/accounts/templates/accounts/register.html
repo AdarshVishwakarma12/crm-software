@@ -1,9 +1,15 @@
 {% extends 'accounts/base.html' %}
 
+{% load static %}
+
 {% load crispy_forms_tags %}
 
+{% block addCSSlink %}
+    <link rel="stylesheet" type="text/css" href="{% static 'accounts/home.css' %}">
+{% endblock %}
+
 {% block contentBody1 %}
-	<div class="content-section">
+	<div class="login-window">
 		<form method="POST"> 
 			{% csrf_token %}
 			<fieldset class="form-group">
