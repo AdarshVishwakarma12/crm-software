@@ -6,6 +6,25 @@
 
 {% block addCSSlink %}
     <link rel="stylesheet" type="text/css" href="{% static 'accounts/login.css' %}">
+
+    <style>
+        .form-control {
+            background-color: rgb(12, 15, 15);
+            color: white;
+            border: 1px solid white;
+            caret-color: white;
+        }
+
+        .form-control::placeholder {
+            color: white;
+        }
+
+        .form-control:focus {
+            background-color: black;
+            color: white;
+            /*border-color: var(--featuredApp-contacts-form-control-input-focus-border);*/
+        }
+    </style>
 {% endblock addCSSlink %}
 
 {% block contentBody1 %}
@@ -18,12 +37,12 @@
                 {{ form|crispy }}
             </fieldset>
 
-            <div class="form-group">
+            <div class="form-group" style="padding-top: 12px;">
                 <button class="btn btn-outline-info" type="submit">Login</button>
             </div>
         </form>
 
-        <div class="border-top pt-3">
+        <div class="border-top pt-3" style="padding-top: 12px;">
             <small class="text-muted">
                 Need An Account? <a class="ml-2" href="{% url 'register' %}">Sign Up Now</a>
             </small>

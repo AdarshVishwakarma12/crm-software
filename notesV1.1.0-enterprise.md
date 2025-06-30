@@ -14,13 +14,12 @@
         - DONE Implement AJAX
         - Adapt with Theme
     - ONGOING Add filter ['by list'; 'by date created'; 'other']
-    - ONGOING Custom Column
-        - Add Pop Up Window
-        - Implement Dragger
-        - Working Save Button
-        - Create Model to save changes
-        - Add Reset Button
-    - Add Custom fields shown on the page
+    - DONE Custom Column
+        - DONE Add Pop Up Window
+        - DONE Implement Dragger
+        - DONE Working Save Button
+        - DONE Create Model to save changes
+        - DONE Add Reset Button
     - Add JS for smooth 'list search' and 'contact search'
 
 - Tasks
@@ -30,13 +29,13 @@
             - Can't be choose until List is selected
             - Show Contacts based on current List
             - Contact Can be Empty
-    - Add 'In Progress' Button for 'New' tasks
+    - Add 'In Progress' Button for 'New' tasksw
 
 - Roles
     - Add roles [Manager; Senior Executive; Executive;]
         - Default Settings
 
-- Add Outlook Authentication
+- DONE Add Outlook Authentication
 
 - Secure
 - Update Bootstrap
