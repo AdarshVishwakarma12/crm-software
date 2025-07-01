@@ -206,6 +206,9 @@ class Client(BaseModel):
     # Default Manager brings all the Client {effect: Project.all_objects.filter()}
     all_objects = models.Manager()
 
+    # Adding 'created_by' Field -> tracking record
+    created_by_user = models.ForeignKey(BusinessUser, blank=True, null=True, on_delete = models.CASCADE, related_name="created_by_user")
+
     # Adding OneToOne field [linking with contact
     list = models.ForeignKey(Project, on_delete=models.CASCADE)
 

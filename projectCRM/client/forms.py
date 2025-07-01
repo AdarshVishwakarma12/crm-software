@@ -48,7 +48,7 @@ class ClientCreationForm(forms.ModelForm):
         # specifying the model we are targeting
         model = Client
         # Field to show in Form
-        fields = ('name', 'email', 'country_code', 'phone', 'address', 'description', 'list')
+        fields = ('name', 'email', 'country_code', 'phone', 'address', 'description', 'list',)
 
     # We need to over-ride the __init__ method (getting the projects from current user)
     # we also include the 'user' field in the views.py
@@ -60,7 +60,7 @@ class ClientCreationForm(forms.ModelForm):
         except:
             possible_projects = None
 
-        # Don't  mess with the original __init__ method! EVER
+        # Don't mess with the original __init__ method! EVER
         super().__init__(*args, **kwargs)
 
         # The following code set the possible value of project

@@ -294,6 +294,7 @@ def contact_view(request, *args, **kwargs):
                 if(formB.is_valid()):
                     clientValidForm = formB.save(commit = False)
                     clientValidForm.companyAssignee = active_business_user
+                    clientValidForm.created_by_user = logged_in_user
                     clientValidForm.save()
                     messages.success(request, f"New Client Created Successfully!")
                     ActivityLog.objects.create(user=logged_in_user, action=f"Created New Client")
