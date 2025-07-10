@@ -1,0 +1,72 @@
+from rest_framework import generics, permissions
+
+from django.contrib.auth.models import User
+
+from accounts.models import (
+    BusinessUser,
+    Role,
+    AccessPermission,
+)
+
+from client.models import (
+    Project,
+    ProjectAccessPermission,
+    Client,
+    Document,
+    Task,
+    ActivityLog,
+)
+
+from .serializers import (
+    UserSerializer,
+    BusinessUserSerializer,
+    ProjectSerializer,
+    ClientSerializer,
+    DocumentSerializer,
+    TaskSerializer,
+    ActivityLogSerializer,
+)
+
+class AndroidSignUpView(generics.CreateAPIView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+    permission_classes = [permissions.AllowAny]
+
+class AndroidDashboardView(generics.GenericAPIView):
+    permission_classes = [permissions.IsAuthenticated]
+
+    def get(self, request):
+        return Response({
+            "total_leads": Client.objects.count(),
+            "total_tasks": Task.objects.count(),
+            "total_roles": Role.objects.count(),
+        })
+
+class AndroidProjectView(generics.ListAPIView):
+    queryset = Project.objects.all()
+    serializer_class = ProjectSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class AndroidClientListView(generics.ListAPIView):
+    queryset = Client.objects.all()
+    serializer_class = ClientSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class AndroidDocumentView(generics.ListAPIView):
+    queryset = Document.objects.all()
+    serializer_class = DocumentSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class AndroidTaskListView(generics.ListAPIView):
+    queryset = Task.objects.all()
+    serializer_class = TaskSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+class AndroidActivityLogView(generics.ListAPIView):
+    queryset = ActivityLog.objects.all()
+    serializer_class = ActivityLogSerializer
+    permission_classes = [permissions.IsAuthenticated]
+
+# class RoleListView(generics.ListAPIView):
+#     queryset = Role.objects.all()
+#     serializer_class = RoleSerializer

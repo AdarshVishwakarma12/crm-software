@@ -16,6 +16,12 @@ from featuredApp.views import profile_view
 # for Authentication - Login and Logout
 from django.contrib.auth import views as auth_views
 
+# Android Application
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView
+)
+
 # URL's!
 urlpatterns = [
 
@@ -49,3 +55,33 @@ urlpatterns = [
     path('apps/', include('featuredApp.urls')),
 
 ]  + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+# Android Application
+
+if True:
+    from androidApplication.views import (
+        AndroidSignUpView,
+        AndroidDashboardView,
+        AndroidProjectView,
+        AndroidClientListView,
+        AndroidDocumentView,
+        AndroidTaskListView,
+        AndroidActivityLogView,
+    )
+
+    androidApplicationURL = [
+        path('api/token/', TokenObtainPairView.as_view(), name='android-token_obtain_pair'),
+        path('api/token/refresh/', TokenRefreshView.as_view(), name='android-token_refresh'),
+
+        path('api/signup/', AndroidSignUpView.as_view(), name='android-signup'),
+        path('api/dashboard/', AndroidDashboardView.as_view(), name='android-dashboard'),
+        path('api/projects/', AndroidProjectView.as_view(), name='android-project-list'),
+        path('api/clients/', AndroidClientListView.as_view(), name='android-client-list'),
+        path('api/documents/', AndroidDocumentView.as_view(), name='android-document-list'),
+        path('api/tasks/', AndroidTaskListView.as_view(), name='android-task-list'),
+        path('api/activityLog', AndroidActivityLogView.as_view(), name='android-activity-log-list'),
+    ]
+else:
+    androidApplicationURL = None
+
+urlpatterns += androidApplicationURL

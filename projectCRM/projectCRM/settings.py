@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'featuredApp.apps.FeaturedappConfig',
     'client.apps.ClientConfig',
     'accounts.apps.AccountsConfig',
+    'androidApplication.apps.AndroidapplicationConfig',
 
     'crispy_forms',
     'crispy_bootstrap4',
@@ -45,6 +46,11 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+
+    # Application
+    'rest_framework',
+    'rest_framework_simplejwt',
+    'corsheaders',
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -76,6 +82,16 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'allauth.account.middleware.AccountMiddleware',
 ]
+
+MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
+
+CORS_ALLOW_ALL_ORIGINS = True
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES' : (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
 
 ROOT_URLCONF = 'projectCRM.urls'
 
