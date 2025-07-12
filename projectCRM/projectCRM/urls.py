@@ -22,6 +22,10 @@ from rest_framework_simplejwt.views import (
     TokenRefreshView
 )
 
+# Android Application - Google Sign In
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+
 # URL's!
 urlpatterns = [
 
@@ -82,6 +86,16 @@ if True:
         path('api/activityLog', AndroidActivityLogView.as_view(), name='android-activity-log-list'),
     ]
 else:
-    androidApplicationURL = None
+    androidApplicationURL = list()
+
+if True:
+    from androidApplication.views import GoogleLoginJWT
+
+    androidApplicationGoogleAuth = [
+        path("api/auth/android-google-login/", GoogleLoginJWT.as_view(), name="google-login-jwt"),
+    ]
+else:
+    androidApplicationGoogleAuth = list()
 
 urlpatterns += androidApplicationURL
+urlpatterns += androidApplicationGoogleAuth

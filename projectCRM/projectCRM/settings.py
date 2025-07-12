@@ -1,22 +1,19 @@
+# ---- ==== IMPORT Necessary Modules ==== ----
 from pathlib import Path
 import os
 from django.urls import reverse_lazy
 
-# Build paths inside the project like this: BASE_DIR / 'subdir'.
+
+# ---- ==== Build paths inside the project like this: BASE_DIR / 'subdir'. ==== ----
 BASE_DIR = Path(__file__).resolve().parent.parent
 
 
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
-
-# SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = 'django-insecure-l3!d6qap(m@zdf^ap$y&p!88k)!zhca0p-j!6c29zuw^ml6ij_'
+# ---- ==== Setting Up 'SECRET_KEY' and 'DEBUG' ==== ----
 SECRET_KEY = os.environ.get("SECRET_KEY") 
-
-# SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = True
 DEBUG = (os.environ.get("DEBUG_VALUE") == "True")
 
+
+# ---- ==== Defining the URL the project can Access By ===== ----
 ALLOWED_HOSTS = [
     "CtrlCRM.pythonanywhere.com",
     "http://localhost:8000/",
@@ -27,10 +24,11 @@ ALLOWED_HOSTS = [
 ]
 
 
-# Application definition
-
+# ---- ==== Related to Google Login SetUp ==== ----
 SITE_ID = 3
 
+
+# ---- ==== INSTALLED_APPS ==== ----
 INSTALLED_APPS = [
     'featuredApp.apps.FeaturedappConfig',
     'client.apps.ClientConfig',
@@ -47,10 +45,14 @@ INSTALLED_APPS = [
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
 
-    # Application
+    # Android Application
     'rest_framework',
     'rest_framework_simplejwt',
     'corsheaders',
+    'dj_rest_auth',
+    'dj_rest_auth.registration',
+    'rest_framework.authtoken',
+
 
     'django.contrib.admin',
     'django.contrib.auth',
@@ -60,6 +62,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
+
+# ---- ==== SOCIAL ACCOUNTS used to Authenticate User ==== ----
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
         'SCOPE': [
@@ -72,6 +76,7 @@ SOCIALACCOUNT_PROVIDERS = {
     }
 }
 
+# ---- ==== ADDITIONAL SECURITY ==== ----
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -83,18 +88,16 @@ MIDDLEWARE = [
     'allauth.account.middleware.AccountMiddleware',
 ]
 
+# ---- ==== Corsheaders for Android Application Developement ==== ----
 MIDDLEWARE.insert(0, 'corsheaders.middleware.CorsMiddleware')
-
 CORS_ALLOW_ALL_ORIGINS = True
 
-REST_FRAMEWORK = {
-    'DEFAULT_AUTHENTICATION_CLASSES' : (
-        'rest_framework_simplejwt.authentication.JWTAuthentication',
-    ),
-}
 
+# ---- ==== Root urls.py file Location ==== ----
 ROOT_URLCONF = 'projectCRM.urls'
 
+
+# ---- ==== Default template file Location ==== ----
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -115,12 +118,14 @@ TEMPLATES = [
     },
 ]
 
+# ---- ==== Additional Security ==== ----
+
 WSGI_APPLICATION = 'projectCRM.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
+# ---- ==== Database [Migration Needed!] ==== ----
 
+# https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
@@ -129,7 +134,7 @@ DATABASES = {
 }
 
 
-# Password validation
+# ---- ==== Password validation ==== ----
 # https://docs.djangoproject.com/en/5.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -148,12 +153,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.1/topics/i18n/
-
+# ---- ==== Internationalization ==== ----
 LANGUAGE_CODE = 'en-us'
 
-# Change the Time Zone from 'UTC' to 'IST'.
 TIME_ZONE = 'Asia/Kolkata'
 
 USE_I18N = True
@@ -161,49 +163,54 @@ USE_I18N = True
 USE_TZ = True
 
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.1/howto/static-files/
-
+# ---- ==== Static files (CSS, JavaScript, Images) ==== ----
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = 'static/'
 
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
+# ---- ==== Default primary key field type ==== ----
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+
+# ---- ==== DISCARD ITEM ==== ----
 # No longer needed
 # # Changed Auth model to BusinessUser which allows more specific fields..
 # # company email; company name; + AbstractBaseUser + exceptional fields
 # AUTH_USER_MODEL = 'accounts.BusinessUser'
 
 
+# ---- ==== Authentication Backend ==== ----
 AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',  # Default Django backend
     # 'allauth.account.auth_backends.AuthenticationBackend', # Cutom [GOOGLE LOGIN]
 ]
 
-# ---- ==== Microsoft Login ==== ----
+
+# ---- ==== Microsoft Login [Web Application] ==== ----
 MSAL_CLIENT_ID = os.environ.get('MICROSOFT_CLIENT_ID')
 MSAL_CLIENT_SECRET = os.environ.get('MICROSOFT_CLIENT_SECRET')
 MSAL_AUTHORITY = "https://login.microsoftonline.com/common"  # or your tenant
 MSAL_REDIRECT = "http://localhost:8000/get_token"
 MSAL_SCOPES = ["User.Read"]
 
-# ---- ==== Specific to CRM Software ==== ----
 
-# Cirspy forms used at userCreation, userLogin, and other..
+# ---- ==== Specific to Froms ==== ----
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
+
+# ---- ==== Media File Location ==== ----
 # Added media path (to store logo of company and storing Documents)
 # Secured folder can't be accessed directly
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-# Login and Logout Redirect's
+
+# ---- ==== Login and Logout Redirect ==== ----
 LOGIN_REDIRECT_URL = reverse_lazy('profile')
 LOGOUT_REDIRECT_URL = "/"
 
+
+# ---- ==== Email SetUp ==== ----
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
@@ -212,12 +219,31 @@ EMAIL_USE_TLS = True
 EMAIL_HOST_USER = os.environ.get('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_HOST_PASSWORD')
 
-print(EMAIL_HOST_USER)
 
+# ---- ==== Specific to Mobile Application ==== ----
+# JWT_AUTH_COOKIE = 'access'
+# JWT_AUTH_REFRESH_COOKIE = 'refresh'
+# TOKEN_MODEL = None
+# SIMPLE_JWT = {
+#     'AUTH_HEADER_TYPES': ('Bearer',),
+# }
+# REST_USE_JWT = True
+
+REST_USE_JWT = True
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+}
+
+
+# ---- ==== DISCARD ITEMS ==== ----
 # Set login page
 # LOGIN_URL = 'login'
 
-# For local development
+
+# ---- ==== Local development ==== ----
 # if DEBUG:
 #     import mimetypes
 #     mimetypes.add_type("image/png", ".png", True)

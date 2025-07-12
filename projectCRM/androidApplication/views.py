@@ -70,3 +70,16 @@ class AndroidActivityLogView(generics.ListAPIView):
 # class RoleListView(generics.ListAPIView):
 #     queryset = Role.objects.all()
 #     serializer_class = RoleSerializer
+
+# Google Authentication
+from dj_rest_auth.registration.views import SocialLoginView
+from allauth.socialaccount.providers.google.views import GoogleOAuth2Adapter
+from dj_rest_auth.jwt_auth import JWTCookieAuthentication
+from dj_rest_auth.serializers import JWTSerializer
+from dj_rest_auth.registration.serializers import SocialLoginSerializer
+
+class GoogleLoginJWT(SocialLoginView):
+    # authentication_classes = [JWTCookieAuthentication]
+    # serializer_class = SocialLoginSerializer
+    adapter_class = GoogleOAuth2Adapter
+    # response_serializer = JWTSerializer
