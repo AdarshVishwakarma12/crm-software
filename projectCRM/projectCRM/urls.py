@@ -97,5 +97,16 @@ if True:
 else:
     androidApplicationGoogleAuth = list()
 
+if True:
+    from androidApplication.views import MicrosoftLoginJWT
+
+    androidApplicationMicrosoftAuth = [
+        path("api/auth/android-outlook-login/", MicrosoftLoginJWT.as_view(), name="microsoft-login-jwt"),
+    ]
+
+else:
+    androidApplicationMicrosoftAuth = list()
+
 urlpatterns += androidApplicationURL
 urlpatterns += androidApplicationGoogleAuth
+urlpatterns += androidApplicationMicrosoftAuth
