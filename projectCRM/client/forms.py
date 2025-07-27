@@ -92,6 +92,37 @@ class ClientCreationForm(forms.ModelForm):
         self.fields['list'].empty_label = 'Select list'
 
 
+# ---- ==== Form for creating new Custom Field for Client Model ==== ----
+from .models import ClientCustomField
+
+class ClientCustomFieldForm(forms.ModelForm):
+    class Meta:
+        model = ClientCustomField
+
+        fields = (
+            'key', 
+            'value', 
+        )
+    
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+
+# ---- ==== Form for Uploading CSV File ==== ----
+class CSVUploadForm(forms.Form):
+    csv_upload = forms.FileField()
+
+    def clean_csv_file(self):
+        uploaded_file = self.cleaned_data.get('csv_file')
+
+        max_size = 20 * 1024 * 1024
+
+        if(uploaded_file.size > max_size):
+            raise forms.ValidationError("File Size exceeeeeedes the 20MB limit!")
+        
+        return uploaded_file
+
+
 # ---- ==== Form for creating new documents ==== ----
 from .models import Document
 

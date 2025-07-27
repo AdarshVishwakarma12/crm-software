@@ -968,21 +968,21 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .form-control {
-            background-color: var(--featuredApp-contacts-form-control-input-bg);
-            color: var(--featuredApp-contacts-form-control-input-color);
-            border: 1px solid var(--featuredApp-contacts-form-control-input-border);
-            caret-color: var(--featuredApp-contacts-form-control-input-caret-color);
-        }
+    background-color: var(--featuredApp-contacts-form-control-input-bg);
+    color: var(--featuredApp-contacts-form-control-input-color);
+    border: 1px solid var(--featuredApp-contacts-form-control-input-border);
+    caret-color: var(--featuredApp-contacts-form-control-input-caret-color);
+}
 
-        .form-control::placeholder {
-            color: var(--featuredApp-contacts-form-control-input-placeholder);
-        }
+.form-control::placeholder {
+    color: var(--featuredApp-contacts-form-control-input-placeholder);
+}
 
-        .form-control:focus {
-            background-color: var(--featuredApp-contacts-form-control-input-bg);
-            color: var(--featuredApp-contacts-form-control-input-color);
-            /*border-color: var(--featuredApp-contacts-form-control-input-focus-border);*/
-        }
+.form-control:focus {
+    background-color: var(--featuredApp-contacts-form-control-input-bg);
+    color: var(--featuredApp-contacts-form-control-input-color);
+    /*border-color: var(--featuredApp-contacts-form-control-input-focus-border);*/
+}
 
 @media (min-width: 769px) {
     .account-panel-feedback {

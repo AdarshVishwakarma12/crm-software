@@ -24,6 +24,17 @@
 
     - Add option to add more fields in Client data
 
+- Add Upload CSV
+    - Add 'Upload CSV' to Model
+    - Create a Form for CSV Upload
+    - View to Handle CSV Upload
+    - Template for CSV Upload
+    - URL Routing
+    - Error Handling and User Feedback
+
+- Add Download CSV
+    - For Future
+
 - Add Option for Custom Field in Client Model
     - Creating New model - ClientCustomField (store the key-value pairs for custom field)
         - Fields [Key; Value; Client(Connect with Client Model - the instance);]
@@ -31,7 +42,8 @@
     - Migrate the Changes
     - Create Form for this model
     - Update the UI to add more fields!
-    - Update in ClientCreation function
+    - Update in Client Creation Form
+    - Update the UI for Contact Detailed View
 
 - Tasks
     - Task Creation Form
@@ -48,6 +60,12 @@
 
 - DONE Add Outlook Authentication
     - Check if it works for Multiple Account
+
+- Add Max File Size
+    - Limit User to Upload file more than 20 MB
+        - DONE Updating Django Setting
+        - ONGOING JavaScript (Restrict File, before Uploading)
+    - Error Message to User
 
 - Migrate to PostgreSQL
 

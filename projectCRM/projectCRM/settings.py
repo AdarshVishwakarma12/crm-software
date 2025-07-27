@@ -239,6 +239,11 @@ REST_FRAMEWORK = {
 }
 
 
+# ---- ==== Limit MAX Size for File Upload ==== ----
+DATA_UPLOAD_MAX_MEMORY_SIZE = 20 * 1024 * 1024
+FILE_UPLOAD_MAX_MEMORY_SIZE = 20 * 1024 * 1024
+
+
 # ---- ==== DISCARD ITEMS ==== ----
 # Set login page
 # LOGIN_URL = 'login'

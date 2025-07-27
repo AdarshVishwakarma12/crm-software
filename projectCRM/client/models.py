@@ -236,6 +236,12 @@ class ClientCustomField(BaseModel):
     # client - Foreign key with Client
     client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='custom_fields')
 
+    # Trash Implementation
+    # Custom Manager hides the deleted Client {effect: Project.objects.filter()}
+    objects = CustomManager()
+    # Default Manager brings all the Client {effect: Project.all_objects.filter()}
+    all_objects = models.Manager()
+
     def __str__(self):
         return f'{self.client.name} - {self.key}'
 

@@ -11,7 +11,10 @@ from django.contrib import messages
 
 # Client Model and Form
 from client.models import Client
+from client.models import ClientCustomField
 from client.forms import ClientCreationForm
+from client.forms import ClientCustomFieldForm
+from client.forms import CSVUploadForm
 
 # Project Model and Form
 from client.models import Project
@@ -262,6 +265,7 @@ def contact_view(request, *args, **kwargs):
     if(request.method == "POST"):
         # Possible Values: ['project_form', 'client_form']
         form_type = request.POST.get("form_type")
+        custom_fields = request.POST.getlist('custom_fields')
 
         # Handeling two different form off one view
         if(form_type == 'project_form'):
@@ -292,10 +296,18 @@ def contact_view(request, *args, **kwargs):
 
             if get_active_business_user_with_permission(request, 'can_add_contact', show_err='Add')[1] == True:
                 if(formB.is_valid()):
+
+                    # Adding new client
                     clientValidForm = formB.save(commit = False)
                     clientValidForm.companyAssignee = active_business_user
                     clientValidForm.created_by_user = logged_in_user
                     clientValidForm.save()
+
+                    # Adding custom Field
+                    for tmpField in custom_fields:
+                        key, value = tmpField.split(":")
+                        ClientCustomField.objects.create(key = key, value = value, client = clientValidForm)
+
                     messages.success(request, f"New Client Created Successfully!")
                     ActivityLog.objects.create(user=logged_in_user, action=f"Created New Client")
                 else:
@@ -413,10 +425,15 @@ def contact_detailed_view(request, pk):
                 else:
                     messages.error(request, "Can't edit the user detail!")
         return redirect('appContactDetail', pk=pk)
-    
+
+    # Extracting Custom Fields for specific Contact / Client / Lead
+    custom_field = ClientCustomField.objects.filter(client = contact)
+    print(custom_field)
+
     formEditClient = ClientCreationForm(user = active_business_user, possible_projects = projects, instance = contact)
     context = {
         'contact': contact,
+        'custom_fields': custom_field,
         'form': formEditClient,
         'documents': documents,
         'businessuser': user,
@@ -476,6 +493,20 @@ def contact_restore_view(request, pk):
     messages.success(request, f"Restored Contact '{contact_name}")
     ActivityLog.objects.create(user=logged_in_user, action=f"Restored Contact '{contact_name}' from Trash")
     return redirect('appTrash')
+
+
+# ---- ==== Logic Handling ==== ----
+import csv
+@require_POST
+@login_required
+def upload_csv(request):
+    if request.method == 'POST' and request.FILES['csv_file']:
+        form = CSVUploadForm(request.POST, request.FILES)
+
+        if form.is_valid():
+            csv_file = request.FILES['csv_file']
+            decode_file = csv_file.read().decode('utf-8').splitlines()
+            reader = csv.DictReader(decode_file)
 
 @require_POST
 @login_required

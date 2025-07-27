@@ -126,7 +126,7 @@
 		<!-- Referenced From accounts/register.html -->
 		<div class="content-section">
 			<!-- Added enctype - cause we need file to be loaded -->
-			<form method="POST" enctype="multipart/form-data"> 
+			<form method="POST" enctype="multipart/form-data" onsubmit="validateFileSize()"> 
 				{% csrf_token %}
 				<fieldset class="form-group">
 					<legend class="border-bottom mb-4"> Add Document 
@@ -143,8 +143,11 @@
 						{{ form.file|as_crispy_field }}
 					</div>
 
-					<div class="" style="font-size: 12px; margin-bottom: 10px">
+					<div class="" style="font-size: 12px;">
 						Supported formats for upload: .pdf, .doc, .docx, .png, .svg, .jpg, .jpeg, .xlsx, .csv
+					</div>
+					<div class="" style="font-size: 12px; margin-bottom: 10px">
+						Max Size: 20MB
 					</div>
 					
 					<div class="form-group">
@@ -193,5 +196,19 @@
 				closeDocumentFormPopUp();
 			}
 		});
+
+		// This Script is Specific for preventing the file upload Greater than 20MB
+		function validateFileSize() {
+			const fileInput = document.querySelector('input[type="file"]');
+			const file = fileInput.files[0];
+
+			const maxSize = 20 * 1024 * 1024;
+
+			if(file && file.size > maxSize) {
+				alert('File size exceeds the 20MB limit!');
+				return false;
+			}
+			return true;
+		}
 	</script>
 {% endblock extraJS %}

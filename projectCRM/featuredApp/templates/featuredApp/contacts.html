@@ -72,7 +72,7 @@
 
 		<!-- Last we have [Add Button] -->
 		<li class="nav-item" style="padding-left: 4px;">
-			<button class="add-btn btn btn-sm icon-button edit" type="button" onclick="openProjectFormPopUp()">
+			<button class="add-btn btn btn-sm icon-button edit" style="outline: 1px solid black;" type="button" onclick="openProjectFormPopUp()">
 				<i class="fas fa-plus"></i>
 			</button>
 		</li>
@@ -83,7 +83,7 @@
 		<form action="{% url 'appProjectDelete' selected_project_name %}" method="post" style="padding-left: 4px">
 			{% csrf_token %}
 			<!-- Delete Button -->
-			<button class="add-btn btn btn-sm icon-button delete" type="submit">
+			<button class="add-btn btn btn-sm icon-button delete" style="outline: 1px solid black;" type="submit">
 				<i class="fas fa-trash-alt"></i>
 			</button>
 		</form>
@@ -99,9 +99,12 @@
 		<div>
 
 
-			<button class="add-btn btn btn-sm icon-button column" type="button" onclick="openCustomColumnsPopUp()">
-				<img src="{% static 'featuredApp/icons/filter-svgrepo-com.svg' %}" alt="" height="25" style="filter: invert(1);">
+			<button class="add-btn btn btn-sm icon-button edit" style="outline: 1px solid black;" type="button" onclick="openCustomColumnsPopUp()">
+				<i class="fas fa-filter"></i>
 			</button>
+
+			<button class="btn btn-dark" type="button" onclick="">Upload CSV</button>
+
 			<button class="btn btn-dark" type="button" onclick="openDocumentFormPopUp()">Add Contact</button>
 
 			<!-- This feature is for future development -->
@@ -246,6 +249,17 @@
 					<div class="form-group">
 						{{ formB.description|as_crispy_field }}
 					</div>
+
+					<!-- Custom Field -->
+					<div>Custom Fields</div>
+				    <div id="custom-fields-container">
+				        <div>
+				            <input type="text" name="custom_fields" placeholder="Key:Value" required>
+				        </div>
+				    </div>
+				    
+				    <button type="button" id="add-custom-field-btn">Add another field</button>
+				    <!-- Custom Field Ended -->
 
 					<div class="form-group">
 						{{ formB.list|as_crispy_field }}
@@ -392,6 +406,14 @@
 				closeCustomColumnsPopUp();
 			}
 		});
+
+		// This Script is Specific for Adding Custom Field
+		document.getElementById('add-custom-field-btn').addEventListener('click', function() {
+	        const container = document.getElementById('custom-fields-container');
+	        const input = document.createElement('div');
+	        input.innerHTML = '<input type="text" name="custom_fields" placeholder="Key:Value" required>';
+	        container.appendChild(input);
+	    });
 
 		// Script Specific for Search Box
 		const inputSearchBox = document.getElementById('search-input');
