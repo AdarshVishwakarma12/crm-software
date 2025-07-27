@@ -43,14 +43,35 @@ class AndroidDashboardView(generics.GenericAPIView):
         })
 
 class AndroidProjectView(generics.ListAPIView):
-    queryset = Project.objects.all()
+    # queryset = Project.objects.all()
     serializer_class = ProjectSerializer
     permission_classes = [permissions.IsAuthenticated]
 
+    def get_queryset(self):
+        try:
+            userFromRequest = self.request.user
+            businessUserFromRequest = BusinessUser.objects.get(user = userFromRequest)
+            projectQuerySetFromRequest = Project.objects.filter(user = businessUserFromRequest)
+            return projectQuerySetFromRequest
+        except:
+            pass
+
+        return Project.objects.none()
+
 class AndroidClientListView(generics.ListAPIView):
-    queryset = Client.objects.all()
+    # queryset = Client.objects.all()
     serializer_class = ClientSerializer
     permission_classes = [permissions.IsAuthenticated]
+
+    def get_queryset(self):
+        try:
+            userFromRequest = self.request.user
+            businessUserFromRequest = BusinessUser.objects.get(user = self.request.user)
+            ClientQuerySetFromRequest = Client.objects.filter(companyAssignee = businessUserFromRequest)
+            return ClientQuerySetFromRequest
+        except:
+            pass
+        return Client.objects.none()
 
 class AndroidDocumentView(generics.ListAPIView):
     queryset = Document.objects.all()

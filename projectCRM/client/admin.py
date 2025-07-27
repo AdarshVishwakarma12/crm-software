@@ -6,6 +6,7 @@ from .models import Contact
 from .models import ProjectAccessPermission
 from .models import Task
 from .models import ActivityLog
+from .models import ClientCustomField
 
 # Importing Leads model(/table) from model.py
 from .models import Lead
@@ -28,3 +29,5 @@ admin.site.register(ProjectAccessPermission)
 admin.site.register(Task)
 
 admin.site.register(ActivityLog)
+
+admin.site.register(ClientCustomField)

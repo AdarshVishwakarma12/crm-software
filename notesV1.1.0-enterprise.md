@@ -22,6 +22,17 @@
         - DONE Add Reset Button
     - Add JS for smooth 'list search' and 'contact search'
 
+    - Add option to add more fields in Client data
+
+- Add Option for Custom Field in Client Model
+    - Creating New model - ClientCustomField (store the key-value pairs for custom field)
+        - Fields [Key; Value; Client(Connect with Client Model - the instance);]
+    - Add model to admin.py (accessible from admin page)
+    - Migrate the Changes
+    - Create Form for this model
+    - Update the UI to add more fields!
+    - Update in ClientCreation function
+
 - Tasks
     - Task Creation Form
         - Add field 'List'
@@ -36,6 +47,9 @@
         - Default Settings
 
 - DONE Add Outlook Authentication
+    - Check if it works for Multiple Account
+
+- Migrate to PostgreSQL
 
 - Secure
 - Update Bootstrap

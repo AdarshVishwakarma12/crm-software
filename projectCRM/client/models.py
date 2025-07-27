@@ -221,6 +221,24 @@ class Client(BaseModel):
         return f'{self.name}'
     
 
+# ---- ==== ClientCustomField Model ==== ----
+# Inherit: [is_deleted; deleted_at]
+# Include: [key; value; client; ]
+# Method: [objects; all_objects; __str__; ]
+class ClientCustomField(BaseModel):
+    
+    # Key - contain field
+    key = models.CharField(max_length=255)
+
+    # Value - corresponding value of key
+    value = models.TextField()
+
+    # client - Foreign key with Client
+    client = models.ForeignKey(Client, on_delete=models.CASCADE, related_name='custom_fields')
+
+    def __str__(self):
+        return f'{self.client.name} - {self.key}'
+
 # ---- ==== Document Model ==== ----
 # Inherit: [is_deleted; deleted_at]
 # Include: [document_name, file; related_to; uploaded_at; description; user; ]
